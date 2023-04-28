@@ -36,6 +36,28 @@ public class Object3D
         }
     }
 
+    public Vertex distanceToObjectAsVertex(Object3D object)
+    {
+        Vertex mid1 = getAnchor();
+        Vertex mid2 = object.getAnchor();
+        return new Vertex(mid2.getX() - mid1.getX(), mid2.getY() - mid1.getY(), mid2.getZ() - mid1.getZ());
+    }
+
+    public double distanceToObjectAsDouble(Object3D object)
+    {
+        Vertex distance = distanceToObjectAsVertex(object);
+        return Math.sqrt(distance.getX()*distance.getX() + distance.getY()*distance.getY() + distance.getZ()*distance.getZ());
+    }
+
+    public Vertex distanceBetweenTwoVerticesAsVertex(Vertex v1, Vertex v2)
+    {return new Vertex(v2.getX() - v1.getX(), v2.getY() - v1.getY(), v2.getZ() - v1.getZ());}
+
+    public double distanceBetweenTwoVerticesAsDouble(Vertex v1, Vertex v2)
+    {
+        Vertex distance = distanceBetweenTwoVerticesAsVertex(v1, v2);
+        return Math.sqrt(distance.getX()*distance.getX() + distance.getY()*distance.getY() + distance.getZ()*distance.getZ());
+    }
+
     // Translation
     public void translateX(int dx)
     {
