@@ -30,6 +30,14 @@ public class Triangle
     public int[] getYCoords(){return new int[]{vertex1.getY(), vertex2.getY(), vertex3.getY()};}
     public int[] getZCoords(){return new int[]{vertex1.getZ(), vertex2.getZ(), vertex3.getZ()};}
 
+    public Vertex getMidVertex()
+    {
+        int x = (vertex1.getX() + vertex2.getX() + vertex3.getX()) / 3;
+        int y = (vertex1.getY() + vertex2.getY() + vertex3.getY()) / 3;
+        int z = (vertex1.getZ() + vertex2.getZ() + vertex3.getZ()) / 3;
+        return new Vertex(x, y, z);
+    }
+
     public void setVertices(Vertex[] vertices)
     {
         if(vertices.length == 3)

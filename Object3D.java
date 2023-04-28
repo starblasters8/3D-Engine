@@ -1,3 +1,4 @@
+import java.awt.*;
 public class Object3D 
 {
     private Triangle[] triangles;
@@ -25,6 +26,15 @@ public class Object3D
             throw new IllegalArgumentException("Index out of bounds");
     }
     public Triangle[] getTriangles(){return triangles;}
+
+    public void draw(Graphics g, Camera c) // Draw the Object3D in order from farthest from camera to closest to camera.
+    {
+        for (Triangle triangle : triangles) 
+        {
+            g.setColor(triangle.getColor());
+            g.fillPolygon(triangle.getXCoords(), triangle.getYCoords(), 3);
+        }
+    }
 
     // Translation
     public void translateX(int dx)

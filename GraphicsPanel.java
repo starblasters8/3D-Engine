@@ -5,7 +5,8 @@ import java.awt.event.ActionListener;
 
 public class GraphicsPanel extends JPanel
 {
-    private Cube cube = new Cube(200, 200, 0);
+    private Camera camera = new Camera(0, 0, 0);
+    private Cube cube = new Cube(200, 200, 50);
 
     public GraphicsPanel(int w, int h)
     {
@@ -20,7 +21,6 @@ public class GraphicsPanel extends JPanel
                 //cube.uniformScale(1.1);
                 repaint();
             }});
-
         timer.start();
     }
 
@@ -29,11 +29,7 @@ public class GraphicsPanel extends JPanel
         super.paintComponent(g);
 
         // Draw a cube with each triangle a different color
-        for (Triangle triangle : cube.getTriangles()) 
-        {
-            g.setColor(triangle.getColor());
-            g.fillPolygon(triangle.getXCoords(), triangle.getYCoords(), 3);
-        }
+        cube.draw(g, camera);
     }
 
     // JFrame
