@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 public class GraphicsPanel extends JPanel
 {
     private Camera camera = new Camera(0, 0, 0);
-    private Cube cube = new Cube(200, 200, 50);
+    private Cube cube = new Cube(200, 200, 500);
 
     public GraphicsPanel(int w, int h)
     {
@@ -14,11 +14,11 @@ public class GraphicsPanel extends JPanel
         setBackground(Color.BLACK);
         cube.uniformScale(2);
 
-        Timer timer = new Timer(250, new ActionListener() {public void actionPerformed(ActionEvent e) {
+        Timer timer = new Timer(100, new ActionListener() {public void actionPerformed(ActionEvent e) {
                 //cube.rotateX(10);
                 //cube.rotateY(10);
                 //cube.rotateZ(10);
-                //cube.uniformScale(1.1);
+                //cube.uniformScale(1.01);
                 repaint();
             }});
         timer.start();

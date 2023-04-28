@@ -27,5 +27,15 @@ public class Vertex
         vertex[2] += dz;
     }
 
+    public Vertex distanceToVertexAsVertex(Vertex vertex)
+    {
+        return new Vertex(vertex.getX() - getX(), vertex.getY() - getY(), vertex.getZ() - getZ());
+    }
+
+    public double distanceToVertexAsDouble(Vertex vertex)
+    {
+        return Math.sqrt(Math.pow(vertex.getX() - getX(), 2) + Math.pow(vertex.getY() - getY(), 2) + Math.pow(vertex.getZ() - getZ(), 2));
+    }
+
     public int[] getVertex(){return vertex;}
 }

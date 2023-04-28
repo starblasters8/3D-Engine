@@ -37,7 +37,7 @@ public class Triangle
         int z = (vertex1.getZ() + vertex2.getZ() + vertex3.getZ()) / 3;
         return new Vertex(x, y, z);
     }
-
+    
     public void setVertices(Vertex[] vertices)
     {
         if(vertices.length == 3)
