@@ -4,17 +4,15 @@ public class Sphere extends Object3D
 {
     private ArrayList<Triangle> triangles = new ArrayList<Triangle>();
     private double radius;
-    private int detailLevel;
 
-    public Sphere(int x, int y, int z, int detailLevel)
+    public Sphere(int x, int y, int z, double radius)
     {
         super();
-        this.detailLevel = detailLevel;
         this.radius = 100;
 
         // (x, y, z) x=right/left y=up/down z=forward/backward
         
-        //Generate the triangle faces of the geodesic sphere to the given detailLevel and radius
+        //Generate the triangle faces of the sphere
         
         
 
@@ -27,8 +25,4 @@ public class Sphere extends Object3D
         setAnchorToCenter();
     }
 
-    public void setRadius(double radius){this.radius = radius;}
-    public void setdetailLevel(int detailLevel){this.detailLevel = detailLevel;}
-    public double getRadius(){return radius;}
-    public int getdetailLevel(){return detailLevel;}
 }

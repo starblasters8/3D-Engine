@@ -7,6 +7,12 @@ public class Vertex
         vertex[1] = y;
         vertex[2] = z;
     }
+    public Vertex(double x, double y, double z) 
+    { 
+        vertex[0] = (int)x;
+        vertex[1] = (int)y;
+        vertex[2] = (int)z;
+    }
 
     public int getX(){return vertex[0];}
     public int getY(){return vertex[1];}
