@@ -15,7 +15,7 @@ public class GraphicsPanel extends JPanel
         setBackground(Color.BLACK);
 
         //objects.put("cube 1", new Cube(200, 200, 500));
-        objects.put("sphere 1", new Sphere(200, 200, 500, 200));
+        objects.put("sphere 1", new Sphere(200, 200, 500));
 
         //objects.get("cube 1").toggleRender();
         
