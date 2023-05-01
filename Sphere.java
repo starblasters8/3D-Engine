@@ -4,17 +4,18 @@ public class Sphere extends Object3D
 {
     private ArrayList<Triangle> triangles = new ArrayList<Triangle>();
     private double radius;
-    private int frequency;
+    private int detailLevel;
 
-    public Sphere(int x, int y, int z, int frequency)
+    public Sphere(int x, int y, int z, int detailLevel)
     {
         super();
-        this.frequency = frequency;
+        this.detailLevel = detailLevel;
         this.radius = 100;
 
         // (x, y, z) x=right/left y=up/down z=forward/backward
         
-        //Generate the triangle faces of the geodesic sphere to the given frequency and radius
+        //Generate the triangle faces of the geodesic sphere to the given detailLevel and radius
+        
         
 
         Triangle[] triArray = new Triangle[triangles.size()];
@@ -27,7 +28,7 @@ public class Sphere extends Object3D
     }
 
     public void setRadius(double radius){this.radius = radius;}
-    public void setfrequency(int frequency){this.frequency = frequency;}
+    public void setdetailLevel(int detailLevel){this.detailLevel = detailLevel;}
     public double getRadius(){return radius;}
-    public int getfrequency(){return frequency;}
+    public int getdetailLevel(){return detailLevel;}
 }
