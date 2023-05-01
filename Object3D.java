@@ -230,4 +230,5 @@ public class Object3D
     public int getRotX(){return (int)rotX;}
     public int getRotY(){return (int)rotY;}
     public int getRotZ(){return (int)rotZ;}
+    public int getTriNum(){return triangles.length;}
 }
