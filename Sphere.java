@@ -14,7 +14,7 @@ public class Sphere extends Object3D
 
         // (x, y, z) x=right/left y=up/down z=forward/backward
         
-        //Generate the triangle faces
+        //Generate the triangle faces of the sphere to the given resolution and radius
         
 
         setTriangles((Triangle[])(triangles.toArray()));
