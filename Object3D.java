@@ -10,7 +10,7 @@ public class Object3D
     public Object3D(Triangle[] triangles){this.triangles = triangles;}
     public Object3D(){}
 
-    public void draw(Graphics g, Camera c) // Draw the Object3D in order from farthest from camera to closest to camera.
+    public void draw(Graphics2D g, Camera c) // Draw the Object3D in order from farthest from camera to closest to camera.
     {
         Triangle[] drawArray = sortTriangles(c);
         for (Triangle triangle : drawArray) 

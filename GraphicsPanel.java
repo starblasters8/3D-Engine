@@ -16,19 +16,22 @@ public class GraphicsPanel extends JPanel
         Timer timer = new Timer(100, new ActionListener() {public void actionPerformed(ActionEvent e) {
                 //cube.rotateX(10);
                 //cube.rotateY(10);
-                //cube.rotateZ(10);
+                //cube.rotateZ(1);
                 //cube.uniformScale(1.01);
                 repaint();
             }});
+
         timer.start();
     }
 
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D)g;
 
         // Draw a cube with each triangle a different color
-        cube.draw(g, camera);
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        cube.draw(g2d, camera);
     }
 
     // JFrame

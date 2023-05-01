@@ -1,16 +1,11 @@
 public class Camera extends Vertex
 {
-    private double rotX, rotY, rotZ;
+    private double rotX=0, rotY=0, rotZ=0;
 
     public Camera(int x, int y, int z)
     {
         super(x, y, z);
-        rotX = 0;
-        rotY = 0;
-        rotZ = 0;
     }
-
-    
 
     public void rotateX(double rotX){this.rotX += rotX;}
     public void rotateY(double rotY){this.rotY += rotY;}
