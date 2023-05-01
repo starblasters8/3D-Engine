@@ -30,7 +30,7 @@ public class Object3D
     public void setRender(boolean render){this.render = render;}
     public boolean getRender(){return render;}
     public void toggleRender(){render = !render;}
-
+    
 
     public Vertex distanceToObjectAsVertex(Object3D object)
     {
