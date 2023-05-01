@@ -1,52 +1,13 @@
-import java.awt.*;
-import java.util.ArrayList;
 public class Object3D 
 {
     private Triangle[] triangles;
     private double scaleX=1, scaleY=1, scaleZ=1;
     private double rotX=0, rotY=0, rotZ=0;
     private Vertex anchor = new Vertex(0, 0, 0);
+    private boolean render = true;
 
     public Object3D(Triangle[] triangles){this.triangles = triangles;}
     public Object3D(){}
-
-    public void draw(Graphics2D g, Camera c) // Draw the Object3D in order from farthest from camera to closest to camera.
-    {
-        Triangle[] drawArray = sortTriangles(c);
-        for (Triangle triangle : drawArray) 
-        {
-            g.setColor(triangle.getColor());
-            g.fillPolygon(triangle.getXCoords(), triangle.getYCoords(), 3);
-        }
-    }
-
-    public Triangle[] sortTriangles(Camera c) // Sort the Triangles from furthest away to closest to the camera
-    {
-        Triangle[] sorted = new Triangle[triangles.length];
-        ArrayList<Triangle> unSorted = new ArrayList<Triangle>();
-
-        for(Triangle triangle : triangles)
-            unSorted.add(triangle);
-
-        for(int i = 0; i < sorted.length; i++)
-        {
-            double maxDistance = 0;
-            int maxIndex = 0;
-            for(int j = 0; j < unSorted.size(); j++)
-            {
-                double distance = unSorted.get(j).getMidVertex().distanceToVertexAsDouble(c);
-                if(distance > maxDistance)
-                {
-                    maxDistance = distance;
-                    maxIndex = j;
-                }
-            }
-            sorted[i] = unSorted.get(maxIndex);
-            unSorted.remove(maxIndex);
-        }
-
-        return sorted;
-    }
 
     public void setTriangle(int index, Triangle triangle)
     {
@@ -65,6 +26,10 @@ public class Object3D
             throw new IllegalArgumentException("Index out of bounds");
     }
     public Triangle[] getTriangles(){return triangles;}
+
+    public void setRender(boolean render){this.render = render;}
+    public boolean getRender(){return render;}
+    public void toggleRender(){render = !render;}
 
 
     public Vertex distanceToObjectAsVertex(Object3D object)

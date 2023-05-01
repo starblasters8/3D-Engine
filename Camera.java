@@ -13,13 +13,32 @@ public class Camera extends Vertex
 
     public void drawAll(Graphics2D g, HashMap<String, Object3D> objectHash)
     {
-        Object3D[] objects = new Object3D[objectHash.size()];
-        int i = 0; int tris = 0;
+        HashMap<String, Object3D> tempHash = new HashMap<String, Object3D>();
+        // Remove all invis objects from being rendered
         for(String key : objectHash.keySet())
-        {objects[i] = objectHash.get(key);i++;tris+=objectHash.get(key).getTriNum();}
+            if(objectHash.get(key).getRender())
+                tempHash.put(key, objectHash.get(key));
+
+        Object3D[] objects = new Object3D[tempHash.size()];
+        int i = 0; int tris = 0;
+        for(String key : tempHash.keySet())
+        {objects[i] = tempHash.get(key);i++;tris+=tempHash.get(key).getTriNum();}
 
         Triangle[] triangleArray = new Triangle[tris];
-        
+        // Populate the array
+        for(Object3D obj : objects)
+        {
+            Triangle[] objTris = obj.getTriangles();
+            for(i = 0; i < objTris.length; i++)
+                triangleArray[i] = objTris[i];
+        }
+
+        triangleArray = sortTriangles(triangleArray);
+        for (Triangle triangle : triangleArray) 
+        {
+            g.setColor(triangle.getColor());
+            g.fillPolygon(triangle.getXCoords(), triangle.getYCoords(), 3);
+        }
     }
 
     public Triangle[] sortTriangles(Triangle[] triangles) // Sort the Triangles from furthest away to closest to the camera
