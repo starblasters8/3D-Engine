@@ -18,12 +18,13 @@ public class GraphicsPanel extends JPanel
         objects.put("sphere 1", new Sphere(200, 200, 500, 25));
 
 
-        objects.get("cube 1").toggleRender();
+        //objects.get("cube 1").toggleRender();
+        
         for(Object3D object : objects.values())
             object.uniformScale(2);
 
         Timer timer = new Timer(1000/maxFPS, new ActionListener() {public void actionPerformed(ActionEvent e) {
-                //objects.get("sphere 1").rotateX(5);
+                objects.get("sphere 1").rotateX(5);
                 repaint();
             }});
 
