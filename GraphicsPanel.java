@@ -9,21 +9,33 @@ public class GraphicsPanel extends JPanel
     private HashMap<String, Object3D> objects = new HashMap<String, Object3D>();
     private int maxFPS = 30;
 
+    private boolean switchScale = true; // Ignore, this is only for showcasing purposes.
+
     public GraphicsPanel(int w, int h)
     {
         this.setPreferredSize(new Dimension(w,h));
         setBackground(Color.BLACK);
 
-        //objects.put("cube 1", new Cube(200, 200, 500));
-        objects.put("sphere 1", new Sphere(500, 200, 500, 25, 15));
+        objects.put("cube 1", new Cube(400, 400, 500));
+        objects.put("sphere 1", new Sphere(250, 200, 500, 10, 15));
 
-        //objects.get("cube 1").toggleRender();
-        
-        for(Object3D object : objects.values())
-            object.uniformScale(1.5);
+        Timer timer = new Timer(1000/maxFPS, new ActionListener() {public void actionPerformed(ActionEvent e) 
+            {
+                for(Object3D object : objects.values())
+                {
+                    double rotSpeed = 5;
+                    object.rotate(rotSpeed, rotSpeed, rotSpeed);
+                    System.out.println(object.getScaleX());
 
-        Timer timer = new Timer(1000/maxFPS, new ActionListener() {public void actionPerformed(ActionEvent e) {
-                //objects.get("sphere 1").rotateX(15);
+                    if(object.getScaleX() <= 1.5 && switchScale)
+                        object.uniformScale(0.01);
+                    else
+                        {object.uniformScale(-0.01); switchScale = false;}
+                    if(object.getScaleX() <= 0.75 && !switchScale)
+                        switchScale = true;
+
+                    object.setAnchorToCenter();
+                }
                 repaint();
             }});
 

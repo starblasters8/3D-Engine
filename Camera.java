@@ -6,7 +6,7 @@ public class Camera extends Vertex
 {
     private double rotX=0, rotY=0, rotZ=0;
 
-    public Camera(int x, int y, int z)
+    public Camera(double x, double y, double z)
     {
         super(x, y, z);
     }
@@ -49,8 +49,15 @@ public void drawAll(Graphics2D g, HashMap<String, Object3D> objectHash)
     // Draw the triangles
     for (Triangle triangle : triangleArray) 
     {
+        int[] xCoords = new int[3];
+        int[] yCoords = new int[3];
+        for(int i = 0; i < triangle.getXCoords().length; i++)
+            xCoords[i] = (int)(triangle.getXCoords()[i]);
+        for(int i = 0; i < triangle.getYCoords().length; i++)
+            yCoords[i] = (int)(triangle.getYCoords()[i]);
+
         g.setColor(triangle.getColor());
-        g.fillPolygon(triangle.getXCoords(), triangle.getYCoords(), 3);
+        g.fillPolygon(xCoords, yCoords, 3);
     }
 }
 

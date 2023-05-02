@@ -26,15 +26,15 @@ public class Triangle
     public void setVertex2(Vertex vertex2){this.vertex2 = vertex2;}
     public void setVertex3(Vertex vertex3){this.vertex3 = vertex3;}
 
-    public int[] getXCoords(){return new int[]{vertex1.getX(), vertex2.getX(), vertex3.getX()};}
-    public int[] getYCoords(){return new int[]{vertex1.getY(), vertex2.getY(), vertex3.getY()};}
-    public int[] getZCoords(){return new int[]{vertex1.getZ(), vertex2.getZ(), vertex3.getZ()};}
+    public double[] getXCoords(){return new double[]{vertex1.getX(), vertex2.getX(), vertex3.getX()};}
+    public double[] getYCoords(){return new double[]{vertex1.getY(), vertex2.getY(), vertex3.getY()};}
+    public double[] getZCoords(){return new double[]{vertex1.getZ(), vertex2.getZ(), vertex3.getZ()};}
 
     public Vertex getMidVertex()
     {
-        int x = (vertex1.getX() + vertex2.getX() + vertex3.getX()) / 3;
-        int y = (vertex1.getY() + vertex2.getY() + vertex3.getY()) / 3;
-        int z = (vertex1.getZ() + vertex2.getZ() + vertex3.getZ()) / 3;
+        double x = (vertex1.getX() + vertex2.getX() + vertex3.getX()) / 3;
+        double y = (vertex1.getY() + vertex2.getY() + vertex3.getY()) / 3;
+        double z = (vertex1.getZ() + vertex2.getZ() + vertex3.getZ()) / 3;
         return new Vertex(x, y, z);
     }
     
@@ -52,22 +52,22 @@ public class Triangle
     }
     public Vertex[] getVertices(){return vertices;}
 
-    public void translateX(int dx)
+    public void translateX(double dx)
     {
         for(Vertex vertex : vertices)
             vertex.translateX(dx);
     }
-    public void translateY(int dy)
+    public void translateY(double dy)
     {
         for(Vertex vertex : vertices)
             vertex.translateY(dy);
     }
-    public void translateZ(int dz)
+    public void translateZ(double dz)
     {
         for(Vertex vertex : vertices)
             vertex.translateZ(dz);
     }
-    public void translate(int dx, int dy, int dz)
+    public void translate(double dx, double dy, double dz)
     {
         for(Vertex vertex : vertices)
             vertex.translate(dx, dy, dz);
