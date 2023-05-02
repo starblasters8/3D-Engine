@@ -7,7 +7,7 @@ public class GraphicsPanel extends JPanel
 {
     private Camera camera = new Camera(0, 0, 0);
     private HashMap<String, Object3D> objects = new HashMap<String, Object3D>();
-    private int maxFPS = 5;
+    private int maxFPS = 30;
 
     public GraphicsPanel(int w, int h)
     {
@@ -15,15 +15,15 @@ public class GraphicsPanel extends JPanel
         setBackground(Color.BLACK);
 
         //objects.put("cube 1", new Cube(200, 200, 500));
-        objects.put("sphere 1", new Sphere(200, 200, 500, 3));
+        objects.put("sphere 1", new Sphere(500, 200, 500, 25, 15));
 
         //objects.get("cube 1").toggleRender();
         
-        //for(Object3D object : objects.values())
-            //object.uniformScale(2);
+        for(Object3D object : objects.values())
+            object.uniformScale(1.5);
 
         Timer timer = new Timer(1000/maxFPS, new ActionListener() {public void actionPerformed(ActionEvent e) {
-                //objects.get("sphere 1").rotateX(5);
+                //objects.get("sphere 1").rotateX(15);
                 repaint();
             }});
 
