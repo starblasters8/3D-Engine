@@ -25,7 +25,6 @@ public class GraphicsPanel extends JPanel
                 {
                     double rotSpeed = 5;
                     object.rotate(rotSpeed, rotSpeed, rotSpeed);
-                    System.out.println(object.getScaleX());
 
                     if(object.getScaleX() <= 1.5 && switchScale)
                         object.uniformScale(0.01);
