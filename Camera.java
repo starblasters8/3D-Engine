@@ -11,91 +11,91 @@ public class Camera extends Vertex
         super(x, y, z);
     }
 
-// Draw all objects in the scene
-public void drawAll(Graphics2D g, HashMap<String, Object3D> objectHash)
-{
-    // Remove all invis objects from being rendered
-    ArrayList<Object3D> unSorted = new ArrayList<Object3D>();
-
-    for(String key : objectHash.keySet())
+    // Draw all objects in the scene
+    public void drawAll(Graphics2D g, HashMap<String, Object3D> objectHash)
     {
-        if(objectHash.get(key).getRender())
-            unSorted.add(objectHash.get(key));
-    }
+        // Remove all invis objects from being rendered
+        ArrayList<Object3D> unSorted = new ArrayList<Object3D>();
 
-    // Convert to an array
-    Object3D[] objects = new Object3D[unSorted.size()];
-    for(int i = 0; i < objects.length; i++)
-        objects[i] = unSorted.get(i);
-
-    // Get the number of triangles
-    int tris = 0;
-    for(Object3D obj : objects)
-        tris += obj.getTriNum();
-
-    // Create the array of triangles
-    Triangle[] triangleArray = new Triangle[tris];
-    // Populate the array
-    int count = 0;
-    for(Object3D obj : objects)
-    {
-        Triangle[] objTris = obj.getTriangles();
-        for(int i = 0; i < objTris.length; i++)
-            triangleArray[count++] = objTris[i];
-    }
-
-    // Sort the triangles
-    triangleArray = sortTriangles(triangleArray);
-    // Draw the triangles
-    for (Triangle triangle : triangleArray) 
-    {
-        int[] xCoords = new int[3];
-        int[] yCoords = new int[3];
-        for(int i = 0; i < triangle.getXCoords().length; i++)
-            xCoords[i] = (int)(triangle.getXCoords()[i]);
-        for(int i = 0; i < triangle.getYCoords().length; i++)
-            yCoords[i] = (int)(triangle.getYCoords()[i]);
-
-        g.setColor(triangle.getColor());
-        g.fillPolygon(xCoords, yCoords, 3);
-    }
-}
-
-public Triangle[] sortTriangles(Triangle[] triangles) // Sort the Triangles from furthest away to closest to the camera
-{
-    Triangle[] sorted = new Triangle[triangles.length];
-    ArrayList<Triangle> unSorted = new ArrayList<Triangle>();
-
-    for(Triangle triangle : triangles)
-        unSorted.add(triangle);
-
-    for(int i = 0; i < sorted.length; i++)
-    {
-        double maxDistance = 0;
-        int maxIndex = 0;
-        for(int j = 0; j < unSorted.size(); j++)
+        for(String key : objectHash.keySet())
         {
-            double distance = distanceToVertexAsDouble(unSorted.get(j).getMidVertex());
-            if(distance > maxDistance)
-            {
-                maxDistance = distance;
-                maxIndex = j;
-            }
+            if(objectHash.get(key).getRender())
+                unSorted.add(objectHash.get(key));
         }
-        sorted[i] = unSorted.get(maxIndex);
-        unSorted.remove(maxIndex);
+
+        // Convert to an array
+        Object3D[] objects = new Object3D[unSorted.size()];
+        for(int i = 0; i < objects.length; i++)
+            objects[i] = unSorted.get(i);
+
+        // Get the number of triangles
+        int tris = 0;
+        for(Object3D obj : objects)
+            tris += obj.getTriNum();
+
+        // Create the array of triangles
+        Triangle[] triangleArray = new Triangle[tris];
+        // Populate the array
+        int count = 0;
+        for(Object3D obj : objects)
+        {
+            Triangle[] objTris = obj.getTriangles();
+            for(int i = 0; i < objTris.length; i++)
+                triangleArray[count++] = objTris[i];
+        }
+
+        // Sort the triangles
+        triangleArray = sortTriangles(triangleArray);
+        // Draw the triangles
+        for (Triangle triangle : triangleArray) 
+        {
+            int[] xCoords = new int[3];
+            int[] yCoords = new int[3];
+            for(int i = 0; i < triangle.getXCoords().length; i++)
+                xCoords[i] = (int)(triangle.getXCoords()[i]);
+            for(int i = 0; i < triangle.getYCoords().length; i++)
+                yCoords[i] = (int)(triangle.getYCoords()[i]);
+
+            g.setColor(triangle.getColor());
+            g.fillPolygon(xCoords, yCoords, 3);
+        }
     }
 
-    return sorted;
-}
+    public Triangle[] sortTriangles(Triangle[] triangles) // Sort the Triangles from furthest away to closest to the camera
+    {
+        Triangle[] sorted = new Triangle[triangles.length];
+        ArrayList<Triangle> unSorted = new ArrayList<Triangle>();
 
-    public void rotateX(double rotX){this.rotX += rotX;}
-    public void rotateY(double rotY){this.rotY += rotY;}
-    public void rotateZ(double rotZ){this.rotZ += rotZ;}
-    public void setRotX(double rotX){this.rotX = rotX;}
-    public void setRotY(double rotY){this.rotY = rotY;}
-    public void setRotZ(double rotZ){this.rotZ = rotZ;}
-    public double getRotX(){return rotX;}
-    public double getRotY(){return rotY;}
-    public double getRotZ(){return rotZ;}
+        for(Triangle triangle : triangles)
+            unSorted.add(triangle);
+
+        for(int i = 0; i < sorted.length; i++)
+        {
+            double maxDistance = 0;
+            int maxIndex = 0;
+            for(int j = 0; j < unSorted.size(); j++)
+            {
+                double distance = distanceToVertexAsDouble(unSorted.get(j).getMidVertex());
+                if(distance > maxDistance)
+                {
+                    maxDistance = distance;
+                    maxIndex = j;
+                }
+            }
+            sorted[i] = unSorted.get(maxIndex);
+            unSorted.remove(maxIndex);
+        }
+
+        return sorted;
+    }
+
+        public void rotateX(double rotX){this.rotX += rotX;}
+        public void rotateY(double rotY){this.rotY += rotY;}
+        public void rotateZ(double rotZ){this.rotZ += rotZ;}
+        public void setRotX(double rotX){this.rotX = rotX;}
+        public void setRotY(double rotY){this.rotY = rotY;}
+        public void setRotZ(double rotZ){this.rotZ = rotZ;}
+        public double getRotX(){return rotX;}
+        public double getRotY(){return rotY;}
+        public double getRotZ(){return rotZ;}
 }
