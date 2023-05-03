@@ -14,6 +14,15 @@ public class Triangle
         randColor();
     }
 
+    public Triangle(Vertex[] vertices)
+    {
+        this.vertices = vertices;
+        vertex1 = vertices[0];
+        vertex2 = vertices[1];
+        vertex3 = vertices[2];
+        randColor();
+    }
+
     public Color getColor(){return color;}
     public void setColor(Color color){this.color = color;}
     public void randColor(){color = new Color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255));}
