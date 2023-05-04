@@ -49,7 +49,7 @@ public class GraphicsPanel extends JPanel
         // Draw a cube with each triangle a different color
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
-        camera.drawAll(g2d, objects);
+        camera.drawAll(g2d, objects, true);
     }
 
     // JFrame

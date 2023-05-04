@@ -12,7 +12,7 @@ public class Camera extends Vertex
     }
 
     // Draw all objects in the scene
-    public void drawAll(Graphics2D g, HashMap<String, Object3D> objectHash)
+    public void drawAll(Graphics2D g, HashMap<String, Object3D> objectHash, boolean orthographic)
     {
         // Remove all invis objects from being rendered
         ArrayList<Object3D> unSorted = new ArrayList<Object3D>();
@@ -45,23 +45,51 @@ public class Camera extends Vertex
         }
 
         // Sort the triangles
-        triangleArray = sortTriangles(triangleArray);
-        // Draw the triangles
-        for (Triangle triangle : triangleArray) 
-        {
-            int[] xCoords = new int[3];
-            int[] yCoords = new int[3];
-            for(int i = 0; i < triangle.getXCoords().length; i++)
-                xCoords[i] = (int)(triangle.getXCoords()[i]);
-            for(int i = 0; i < triangle.getYCoords().length; i++)
-                yCoords[i] = (int)(triangle.getYCoords()[i]);
+        triangleArray = sortByTri(triangleArray);
 
-            g.setColor(triangle.getColor());
-            g.fillPolygon(xCoords, yCoords, 3);
+
+        if(orthographic)
+        {
+            // Draw the triangles from orthographic
+            for (Triangle triangle : triangleArray) 
+            {
+                int[] xCoords = new int[3];
+                int[] yCoords = new int[3];
+                for(int i = 0; i < triangle.getXCoords().length; i++)
+                    xCoords[i] = (int)(triangle.getXCoords()[i]);
+                for(int i = 0; i < triangle.getYCoords().length; i++)
+                    yCoords[i] = (int)(triangle.getYCoords()[i]);
+
+                g.setColor(triangle.getColor());
+                g.fillPolygon(xCoords, yCoords, 3);
+            }
+        }
+        else
+        {
+            // Draw the triangles from perspective
+            drawFromPerspective(g, triangleArray);
         }
     }
 
-    public Triangle[] sortTriangles(Triangle[] triangles) // Sort the Triangles from furthest away to closest to the camera
+    public void drawFromPerspective(Graphics2D g, Triangle[] triangleArray) // Draw the triangles from the perspective of the camera already sorted
+    {
+
+    }
+
+    public Triangle[] sortByVert(Triangle[] triangles) // Sort the triangles by the distance to the camera from their individual vertices.
+    {
+        Triangle[] sorted = new Triangle[triangles.length];
+        ArrayList<Triangle> unSorted = new ArrayList<Triangle>();
+
+        for(Triangle triangle : triangles)
+            unSorted.add(triangle);
+
+        
+
+        return sorted;
+    }
+
+    public Triangle[] sortByTri(Triangle[] triangles) // Sort the triangles by the distance to the camera from the triangles midpoints.
     {
         Triangle[] sorted = new Triangle[triangles.length];
         ArrayList<Triangle> unSorted = new ArrayList<Triangle>();
