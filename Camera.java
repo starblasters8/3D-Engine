@@ -45,7 +45,7 @@ public class Camera extends Vertex
         }
 
         // Sort the triangles
-        triangleArray = sortByTri(triangleArray);
+        triangleArray = sortByVert(triangleArray);
 
 
         if(orthographic)
@@ -76,20 +76,40 @@ public class Camera extends Vertex
 
     }
 
-    public Triangle[] sortByVert(Triangle[] triangles) // Sort the triangles by the distance to the camera from their individual vertices.
+    public Triangle[] sortByVert(Triangle[] triangles) // Sort the triangles by the distance to the camera from their individual vertices. This fixes the issue of triangles being drawn in the wrong order when they are close to each other. (Especially during rotation)
     {
         Triangle[] sorted = new Triangle[triangles.length];
         ArrayList<Triangle> unSorted = new ArrayList<Triangle>();
 
+        // Add all triangles to the unsorted arraylist
         for(Triangle triangle : triangles)
             unSorted.add(triangle);
 
-        
+        // Find the furthest triangle and add it to the sorted array
+        for(int i = 0; i < sorted.length; i++)
+        {
+            double maxDistance = 0;
+            int maxIndex = 0;
+            for(int j = 0; j < unSorted.size(); j++)
+            {
+                double distance = 0;
+                distance += distanceToVertexAsDouble(unSorted.get(j).getVertices()[0]);
+                distance += distanceToVertexAsDouble(unSorted.get(j).getVertices()[1]);
+                distance += distanceToVertexAsDouble(unSorted.get(j).getVertices()[2]);
+                if(distance > maxDistance)
+                {
+                    maxDistance = distance;
+                    maxIndex = j;
+                }
+            }
+            sorted[i] = unSorted.get(maxIndex);
+            unSorted.remove(maxIndex);
+        }
 
         return sorted;
     }
 
-    public Triangle[] sortByTri(Triangle[] triangles) // Sort the triangles by the distance to the camera from the triangles midpoints.
+    public Triangle[] sortByTri(Triangle[] triangles) // Sort the triangles by the distance to the camera from the triangles midpoints. (Old method, not used anymore but may be useful in the future so I'm keeping it, feel free to experiment if you want to!)
     {
         Triangle[] sorted = new Triangle[triangles.length];
         ArrayList<Triangle> unSorted = new ArrayList<Triangle>();
