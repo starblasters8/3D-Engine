@@ -28,6 +28,15 @@ public class Camera extends Vertex
         for(int i = 0; i < objects.length; i++)
             objects[i] = unSorted.get(i);
 
+        // for(Object3D obj : objects)
+        // {
+        //     Vertex tempAnchor = obj.getAnchor();
+        //     obj.setAnchor(new Vertex(0, 0, 0));
+        //     obj.rotateX(rotX);
+
+        //     obj.setAnchor(tempAnchor);
+        // }
+
         // Get the number of triangles
         int tris = 0;
         for(Object3D obj : objects)
@@ -43,6 +52,8 @@ public class Camera extends Vertex
             for(int i = 0; i < objTris.length; i++)
                 triangleArray[count++] = objTris[i];
         }
+
+        
 
         // Sort the triangles
         triangleArray = sortByVert(triangleArray);
